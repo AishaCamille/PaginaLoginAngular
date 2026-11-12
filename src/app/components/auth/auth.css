@@ -1,0 +1,23 @@
+body{
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    height: 100vh;
+    
+}
+.auth-container{
+    max-width: 500px;
+    margin: auto;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(134, 96, 38, 0.575), 0 6px 20px 0 rgba(134, 96, 38, 0.575);
+
+
+    h2{
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        color: rgb(97, 71, 40);
+        margin-left: 20px;
+    }
+}

@@ -23,6 +23,7 @@ export class Auth implements OnInit {
     private fb: FormBuilder, 
     private router: Router
   ){}
+
   ngOnInit(): void {
     this.setupForm();
   }
@@ -31,11 +32,11 @@ export class Auth implements OnInit {
     this.form= this.fb.group({
       name:[''],
       email:['', [Validators.required, Validators.email]],
-      senha:['', [Validators.required, Validators.minLength(6)]]
+      password:['', [Validators.required, Validators.minLength(6)]]
     })
   }
   toggleMode():void{
-    this.isLoginMode = !this.isLoginMode
+    this.isLoginMode = !this.isLoginMode;
   }
   getUsuarios(): Usuario[]{
     const dados = localStorage.getItem('usuarios');//"cosntante? pega dados" que dados? "do local storage"
@@ -43,7 +44,7 @@ export class Auth implements OnInit {
   }
 
   salvarUsuarios(lista: Usuario[]):void{
-    localStorage.setItem('usuario', JSON.stringify(lista));
+    localStorage.setItem('usuarios', JSON.stringify(lista));
   }
   onSubmit(){
     console.log('form submit enviado');
@@ -54,12 +55,27 @@ export class Auth implements OnInit {
     const usuarios = this.getUsuarios();
     
     if(this.isLoginMode){
-      const usuario = usuarios.find(u => u.email && u.password == password);
+      const usuario = usuarios.find(u => u.email && u.password === password);
       if(usuario){
         console.log('login bem sucedido!', usuario);
         localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
-        this.router
+        this.router.navigate(['/home']);//se login bem sucedivo vai p home
+      }else{
+        alert('email ou senha invalidos');
       }
+    }else{
+      const usuarioJaExiste = usuarios.some(u => u.email === email)
+      if(usuarioJaExiste){
+        alert('este email ja esta cadastrado');
+        return;
+      }
+      //logica q cria novo usuario
+      const novoUsuario : Usuario = {name, email, password};
+      usuarios.push(novoUsuario);
+      this.salvarUsuarios(usuarios);
+      alert('cadastro criado com sucesso');
+      this.toggleMode();
+      this.form.reset;
     }
   }
 }
