@@ -6,21 +6,22 @@
 
         <form [formGroup]="form" (ngSubmit)="onSubmit()" >
             @if(!isLoginMode){
-                <div>
+                <div class="EmailSenha">
                     <label for="name">
                         Nome:
                     </label>
                     <input id="name" formControlName="name">
                 </div>
             }
-            <label for="email">Email: </label>
-            <input id="email" formControlName="email" type="email">
+            <div class="EmailSenha">
+                <label for="email">Email: </label>
+                <input id="email" formControlName="email" type="email">
 
-            <label for="password">Senha: </label>
-            <input id="password" type="password" formControlName="password" 
-            [placeholder]="isLoginMode ? '' : 'Informe pelo menos 6 digitos'">
-
-            <button type="submit">{{isLoginMode ? 'Entrar' : 'Cadastrar' }}</button>
+                <label for="password">Senha: </label>
+                <input id="password" type="password" formControlName="password" 
+                [placeholder]="isLoginMode ? '' : 'Informe pelo menos 6 digitos'">
+                </div>
+            <button type="submit">{{isLoginMode ? 'entrar' : 'Cadastrar' }}</button>
         </form>
         <p>
             {{isLoginMode ? 'Não tem conta?' : 'Já tem conta?' }}
