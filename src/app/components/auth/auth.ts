@@ -55,7 +55,7 @@ export class Auth implements OnInit {
     const usuarios = this.getUsuarios();
     
     if(this.isLoginMode){
-      const usuario = usuarios.find(u => u.email && u.password === password);
+      const usuario = usuarios.find(u => u.email === email && u.password === password);
       if(usuario){
         console.log('login bem sucedido!', usuario);
         localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
@@ -75,7 +75,7 @@ export class Auth implements OnInit {
       this.salvarUsuarios(usuarios);
       alert('cadastro criado com sucesso');
       this.toggleMode();
-      this.form.reset;
+      this.form.reset();
     }
   }
 }
